@@ -1,3 +1,4 @@
+import './firebase';
 import { findUserByEmail, getUserLast30DaysActivities } from "./firestore";
 
 async function main() {

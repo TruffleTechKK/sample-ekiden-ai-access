@@ -3,6 +3,9 @@
   "packageManager": "yarn@4.10.3",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
   "dependencies": {
     "date-fns": "^4.1.0",
     "firebase-admin": "^13.5.0",

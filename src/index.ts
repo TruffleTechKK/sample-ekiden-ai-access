@@ -2,7 +2,7 @@ import { subDays } from 'date-fns';
 import { initializeApp, cert } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { type ServiceAccount } from 'firebase-admin';
-import serviceAccount from '../student.json' with {type: "json"};
+import serviceAccount from '../student.json';
 
 initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
@@ -14,7 +14,7 @@ const firestore = getFirestore();
 
 const userId = 'hMflk5xbRCfZBJYdXM8H1stromo2';
 
-async function main() {
+async function getUserActivities(userId: string) {
   const activities = await firestore.collection('USERS')
     .doc(userId)
     .collection('ACTIVITIES')
@@ -23,6 +23,11 @@ async function main() {
     .get()
     .then(docs => docs.docs.map(doc => doc.data()));
 
+  return activities;
+}
+
+async function main() {
+  const activities = await getUserActivities(userId);
   console.log(activities);
 }
 

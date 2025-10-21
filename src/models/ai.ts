@@ -1,0 +1,125 @@
+export const ALL_MODELS = [
+  // 'gemini-1.5-pro',
+  // 'gemini-1.5-flash',
+  'gemini-2.0-flash',
+  'gemini-2.0-flash-lite',
+  'gemini-2.5-pro-preview-03-25', // Deprecated
+  'gemini-2.5-pro',
+  'gemini-2.5-flash',
+  'gemini-2.5-flash-lite-preview-06-17',
+  'claude-3-7-sonnet-20250219',
+  'claude-3-5-sonnet-20241022',
+  'claude-3-5-haiku-20241022',
+  'gpt-4.1',
+  'gpt-4.1-mini',
+  'gpt-4.1-nano',
+  'gpt-4o',
+  'gpt-4o-mini',
+  'gpt-4o-mini-tts',
+] as const;
+export type ModelType = (typeof ALL_MODELS)[number];
+
+export const SupportedModels: { value: ModelType; title: string; icon: string; group: string }[] = [
+  {
+    value: 'gemini-2.0-flash',
+    title: 'Gemini 2.0 Flash',
+    icon: '/gemini.svg',
+    group: 'gemini',
+  },
+  {
+    value: 'gemini-2.0-flash-lite',
+    title: 'Gemini 2.0 Flash Lite',
+    icon: '/gemini.svg',
+    group: 'gemini',
+  },
+  // {
+  //   value: 'gemini-1.5-pro',
+  //   title: 'Gemini 1.5 Pro',
+  //   icon: '/gemini.svg',
+  //   group: 'gemini',
+  // },
+  // {
+  //   value: 'gemini-1.5-flash',
+  //   title: 'Gemini 1.5 Flash',
+  //   icon: '/gemini.svg',
+  //   group: 'gemini',
+  // },
+  // {
+  //   value: 'gemini-2.5-pro-preview-03-25',
+  //   title: 'Gemini 2.5 Pro (Preview 03/25)',
+  //   icon: '/gemini.svg',
+  //   group: 'gemini',
+  // },
+  {
+    value: 'gemini-2.5-pro',
+    title: 'Gemini 2.5 Pro',
+    icon: '/gemini.svg',
+    group: 'gemini',
+  },
+  {
+    value: 'gemini-2.5-flash',
+    title: 'Gemini 2.5 Flash',
+    icon: '/gemini.svg',
+    group: 'gemini',
+  },
+  {
+    value: 'gemini-2.5-flash-lite-preview-06-17',
+    title: 'Gemini 2.5 Flash Lite (Preview 06/17)',
+    icon: '/gemini.svg',
+    group: 'gemini',
+  },
+  {
+    value: 'claude-3-7-sonnet-20250219',
+    title: 'Claude 3.7 Sonnet (2025-02-19)',
+    icon: '/claude.svg',
+    group: 'claude',
+  },
+  {
+    value: 'claude-3-5-sonnet-20241022',
+    title: 'Claude 3.5 Sonnet (2024-10-22)',
+    icon: '/claude.svg',
+    group: 'claude',
+  },
+  {
+    value: 'claude-3-5-haiku-20241022',
+    title: 'Claude 3.5 Haiku (2024-10-22)',
+    icon: '/claude.svg',
+    group: 'claude',
+  },
+  {
+    value: 'gpt-4.1',
+    title: 'GPT-4.1',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+  {
+    value: 'gpt-4.1-mini',
+    title: 'GPT-4.1 Mini',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+  {
+    value: 'gpt-4.1-nano',
+    title: 'GPT-4.1 Nano',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+  {
+    value: 'gpt-4o',
+    title: 'GPT-4o',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+  {
+    value: 'gpt-4o-mini',
+    title: 'GPT-4o Mini',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+  {
+    value: 'gpt-4o-mini-tts',
+    title: 'GPT-4o Mini TTS',
+    icon: '/gpt.svg',
+    group: 'gpt',
+  },
+];

@@ -1,34 +1,55 @@
 import { subDays } from 'date-fns';
-import { initializeApp, cert } from 'firebase-admin/app';
+import { initializeApp, cert, getApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { type ServiceAccount } from 'firebase-admin';
 import serviceAccount from '../student.json';
+import { toObj } from './helpers/data';
+import type { Activity } from './models/activity';
+import type { User } from './models';
 
 initializeApp({
   credential: cert(serviceAccount as ServiceAccount),
-  // The database URL depends on the location of the database
-  databaseURL: "https://student.asia-northeast1.firebaseio.com",
 });
-
 const firestore = getFirestore();
+firestore.settings({
+  databaseId: 'student'
+})
+async function findUserByEmail(email: string): Promise<User | null> {
+  const snapshot = await firestore
+    .collection('USERS')
+    .where('email', '==', email)
+    .get();
 
-const userId = 'hMflk5xbRCfZBJYdXM8H1stromo2';
+  if (!snapshot.docs[0]) {
+    return null;
+  }
 
-async function getUserActivities(userId: string) {
-  const activities = await firestore.collection('USERS')
+  return toObj(snapshot.docs[0]) as User;
+}
+
+async function getUserLast30DaysActivities(userId: string): Promise<Activity[]> {
+  const activities = await firestore
+    .collection('USERS')
     .doc(userId)
     .collection('ACTIVITIES')
     .where('startDate', '>=', subDays(new Date(), 30))
     .orderBy('startDate', 'desc')
     .get()
-    .then(docs => docs.docs.map(doc => doc.data()));
+    .then(snapshot => snapshot.docs.map(doc => toObj(doc) as Activity));
 
   return activities;
 }
 
 async function main() {
-  const activities = await getUserActivities(userId);
-  console.log(activities);
+  const user = await findUserByEmail('tn@truffletechnologies.co.jp');
+  if (!user) {
+    console.log('User not found');
+    return;
+  }
+
+  console.log('User:', user.firstName, user.lastName);
+  const activities = await getUserLast30DaysActivities(user.id);
+  console.log('Found', activities.length, 'activities');
 }
 
 main();

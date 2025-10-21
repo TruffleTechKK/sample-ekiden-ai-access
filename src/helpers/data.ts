@@ -1,4 +1,4 @@
-import type { DocumentSnapshot, Timestamp } from 'firebase-admin/firestore';
+import type { DocumentSnapshot, QueryDocumentSnapshot, Timestamp } from 'firebase-admin/firestore';
 import type { Model, Response } from '../models';
 
 export function dateFromTimestamp(
@@ -25,7 +25,7 @@ export function dateFromTimestamp(
  * @param {WrappedDocumentSnapshot} snap
  * @return {Model | null}
  */
-export function toObj<T extends Model>(snap?: DocumentSnapshot<T | null> | null): T | null {
+export function toObj<T extends Model>(snap?: QueryDocumentSnapshot | DocumentSnapshot<T | null> | null): T | null {
   if (!snap) {
     return null;
   }

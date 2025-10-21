@@ -49,7 +49,7 @@ yarn start
 You'll be working with:
 
 - **Environment**: A clone of our `development` database (safe for testing)
-- **Permissions**: Full READ/WRITE access via your service account
+- **Permissions**: Firestore READ/WRITE and Storage READ access via your service account.
 - **Data Coverage**: All data up to October 20, 2025
 - **Active Test Users**: There're 2 users with regular activity uploads. The 2 users email will be provided.
 

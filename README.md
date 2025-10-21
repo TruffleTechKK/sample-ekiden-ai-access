@@ -51,7 +51,9 @@ You'll be working with:
 - **Environment**: A clone of our `development` database.
 - **Permissions**: Firestore READ/WRITE and Storage READ access via your service account.
 - **Data Coverage**: All data up to October 20, 2025
-- **Active Test Users**: There're 2 users with regular activity uploads. The 2 users email will be provided.
+- **Active Test Users**: There're 2 users with regular activity uploads.
+  - test1@ekiden.ai
+  - test2@ekiden.ai
 
 ### Database Schema
 

@@ -4,7 +4,8 @@ import type { Activity } from './models/activity';
 import { downloadActivityFitFile } from './storage';
 
 async function main() {
-  const email = '';
+  // const email = 'test1@ekiden.ai';
+  const email = 'test2@ekiden.ai';
   const user = await findUserByEmail(email);
   if (!user) {
     console.log('User not found');

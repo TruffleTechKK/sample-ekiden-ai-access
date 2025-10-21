@@ -2,6 +2,7 @@ import { getStorage } from 'firebase-admin/storage';
 import type { Activity } from "./models/activity";
 
 const storage = getStorage();
+const TEMP_DIR = '/tmp';
 
 export async function downloadActivityFitFile(activity: Activity) {
   if (!activity.file) {
@@ -15,7 +16,7 @@ export async function downloadActivityFitFile(activity: Activity) {
     .bucket(activity.file.storageObject.bucket)
     .file(activity.file.storageObject.name);
 
-  const fileName = `/tmp/${activity.id}.FIT`
+  const fileName = `${TEMP_DIR}/${activity.id}.FIT`
   await ref.download({
     destination: fileName
   })

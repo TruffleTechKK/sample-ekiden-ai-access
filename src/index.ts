@@ -4,7 +4,8 @@ import type { Activity } from './models/activity';
 import { downloadActivityFitFile } from './storage';
 
 async function main() {
-  const user = await findUserByEmail('tn@truffletechnologies.co.jp');
+  const email = '';
+  const user = await findUserByEmail(email);
   if (!user) {
     console.log('User not found');
     return;

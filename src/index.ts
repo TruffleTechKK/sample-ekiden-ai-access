@@ -1,12 +1,21 @@
 import { subDays } from 'date-fns';
-import { firestore } from 'firebase-admin';
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
+import { type ServiceAccount } from 'firebase-admin';
+import serviceAccount from '../student.json' with {type: "json"};
 
-const f = firestore();
+initializeApp({
+  credential: cert(serviceAccount as ServiceAccount),
+  // The database URL depends on the location of the database
+  databaseURL: "https://student.asia-northeast1.firebaseio.com",
+});
 
-const userId = '';
+const firestore = getFirestore();
+
+const userId = 'hMflk5xbRCfZBJYdXM8H1stromo2';
 
 async function main() {
-  const activities = await f.collection('USERS')
+  const activities = await firestore.collection('USERS')
     .doc(userId)
     .collection('ACTIVITIES')
     .where('startDate', '>=', subDays(new Date(), 30))

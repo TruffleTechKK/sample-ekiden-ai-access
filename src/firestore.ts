@@ -3,8 +3,7 @@ import { subDays } from "date-fns";
 import { toObj } from "./helpers/data";
 
 import type { User } from "./models";
-import type { Activity } from "./models/activity";
-
+import { ActivitySource, type Activity } from "./models/activity";
 
 const firestore = getFirestore();
 
@@ -26,6 +25,7 @@ export async function getUserLast30DaysActivities(userId: string): Promise<Activ
     .collection('USERS')
     .doc(userId)
     .collection('ACTIVITIES')
+    .where('source', '==', ActivitySource.GARMIN)
     .where('startDate', '>=', subDays(new Date(), 30))
     .orderBy('startDate', 'desc')
     .get()

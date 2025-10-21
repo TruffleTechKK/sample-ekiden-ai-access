@@ -55,6 +55,8 @@ You'll be working with:
   - test1@ekiden.ai
   - test2@ekiden.ai
 
+**DO NOT COMMIT THE DOWNLOADED `.FIT` files**
+
 ### Database Schema
 
 For detailed information about the database structure and entity relationships, please refer to `entity-graph.md`. This file requires `mermaid` to generate the entity graph.

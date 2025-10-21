@@ -8,7 +8,9 @@ export async function downloadActivityFitFile(activity: Activity) {
     throw Error('Activity missing FIT file');
   }
 
-  console.log(activity.file)
+  console.log('Activity FIT file information:')
+  console.log('  Bucket:', activity.file.storageObject.bucket)
+  console.log('  Path:', activity.file.storageObject.name)
   const ref = storage
     .bucket(activity.file.storageObject.bucket)
     .file(activity.file.storageObject.name);

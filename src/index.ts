@@ -10,7 +10,7 @@ async function main() {
     return;
   }
 
-  console.log('User:', user.firstName, user.lastName);
+  console.log(`User: ${user.firstName} ${user.lastName} (${user.email})`);
   const activities = await getUserLast30DaysActivities(user.id);
   console.log('Found', activities.length, 'activities');
 
@@ -19,8 +19,8 @@ async function main() {
   }
 
   const activity = activities[0] as Activity;
-  const file = await downloadActivityFitFile(activity);
-  console.log('Fit file downloaded to', file);
+  const localFilePath = await downloadActivityFitFile(activity);
+  console.log('Fit file for activity', activity.id, 'downloaded to', localFilePath);
 }
 
 main();

@@ -1,0 +1,12 @@
+{
+  "name": "sample-ekiden-ai-access",
+  "packageManager": "yarn@4.10.3",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "firebase-admin": "^13.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

@@ -16,6 +16,12 @@ node_modules
 #!.yarn/cache
 .pnp.*
 
+# Service account credentials - NEVER commit these!
+student.json
+*-firebase-adminsdk-*.json
+serviceAccount*.json
+service-account*.json
+
 *.json
 !package.json
 !tsconfig.json

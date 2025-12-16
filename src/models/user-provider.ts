@@ -8,6 +8,7 @@ export enum UserProviderStatus {
 
 export enum UserProviderType {
   STRAVA = 'strava',
+  SUUNTO = 'suunto',
   GARMIN = 'garmin',
   WHOOP = 'whoop',
   POLAR = 'polar',

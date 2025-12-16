@@ -24,6 +24,10 @@ export const PromptField: string[] = [
   'activity.calories',
   'activity.maxHeartRate',
   'activity.averageHeartRate',
+  // 'activity.feedback',
+  'activity.feedback.perceivedEffort',
+  'activity.feedback.mood',
+  'activity.feedback.notes',
   // 'activity.startCoordinateWeather',
   'activity.startCoordinateWeather.temperature',
   'activity.startCoordinateWeather.heatIndex',
@@ -56,6 +60,9 @@ export const PromptField: string[] = [
   'healthSummary.activityStressDurationInSeconds',
   'healthSummary.lowStressDurationInSeconds',
   'healthSummary.mediumStressDurationInSeconds',
+
+  // User upcoming events
+  'user.upcomingEvents',
 
   // User metrics fields
   'metrics.vo2Max',
@@ -92,9 +99,11 @@ export enum PromptScenario {
   // Apply to topic without activity
   TOPIC_RESPONSE = 'topic-response',
 }
+
 export interface Prompt {
   content: string;
   scenario: PromptScenario;
+  disabled?: boolean;
 }
 
 export type PromptFieldIncluded = Record<PromptFieldType, boolean>;
@@ -130,5 +139,5 @@ export interface CoachPlanCommon extends PromptState {
   freemium?: boolean;
 }
 
-export interface CoachPlan extends CoachPlanCommon, Model { }
-export interface CoachPlanResponse extends CoachPlanCommon, Response { }
+export interface CoachPlan extends CoachPlanCommon, Model {}
+export interface CoachPlanResponse extends CoachPlanCommon, Response {}

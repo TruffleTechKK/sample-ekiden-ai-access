@@ -1,5 +1,5 @@
 import type { User } from 'firebase/auth';
-import type { Activity } from './activity';
+import type { Activity, ActivityFeedback } from './activity';
 import type { Command } from './command';
 import type { ID, Model, Optional, Response } from './models';
 import type { Photo } from './photo';
@@ -7,6 +7,7 @@ import type { Photo } from './photo';
 export enum MessageType {
   Text = 'text',
   Update = 'update',
+  PostActivitySurvey = 'post-activity-survey',
 }
 
 export enum AttachmentType {
@@ -14,6 +15,7 @@ export enum AttachmentType {
   File = 'file',
   Video = 'video',
   Activity = 'activity',
+  ActivityFeedback = 'activity-feedback',
 }
 
 export interface ImageAttachment {
@@ -39,7 +41,12 @@ export interface ActivityAttachment {
   activity: Activity;
 }
 
-export type Attachment = ImageAttachment | VideoAttachment | ActivityAttachment | FileAttachment;
+export interface ActivityFeedbackAttachment {
+  type: AttachmentType.ActivityFeedback;
+  feedback: ActivityFeedback;
+}
+
+export type Attachment = ImageAttachment | VideoAttachment | ActivityAttachment | FileAttachment | ActivityFeedbackAttachment;
 export enum Feedback {
   Positive = 'positive',
   Negative = 'negative',
@@ -50,6 +57,16 @@ export interface MessageFeedback {
   comment: string;
   userId: ID;
   allowRepliesFromEkiden?: boolean;
+}
+
+export enum MessageResponseStatus {
+  Initializing = 'initializing',
+  Reasoning = 'reasoning',
+  Generating = 'generating',
+  Completed = 'completed',
+  Suggesting = 'suggesting',
+  Retrying = 'retrying',
+  Error = 'error',
 }
 
 export interface MessageCommon {
@@ -88,6 +105,13 @@ export interface MessageCommon {
 
   error?: string;
   retried?: boolean;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  suggestionUsage?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  responseUsage?: any;
+
+  responseStatus?: MessageResponseStatus | null;
 }
 
 export interface Message extends MessageCommon, Model { }

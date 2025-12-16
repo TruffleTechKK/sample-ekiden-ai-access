@@ -10,6 +10,7 @@ initializeApp({
 });
 
 const firestore = getFirestore();
+const DB_ID = 'student-20251216';
 firestore.settings({
-  databaseId: 'student'
+  databaseId: DB_ID
 })

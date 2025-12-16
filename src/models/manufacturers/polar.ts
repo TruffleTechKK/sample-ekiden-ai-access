@@ -1,4 +1,4 @@
-import type { Model, Response } from './models';
+import type { Model, Response } from '../models';
 
 export interface PolarUserCommon {
   'polar-user-id': string;

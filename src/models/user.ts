@@ -1,6 +1,7 @@
 import type { ActivitySource } from './activity';
 import type { ModelType } from './ai';
 import type { BodyCompsCommon } from './body-comps';
+import type { HRMetricsCommon } from './hr-metrics';
 import type { Model, Optional, Response } from './models';
 import type { Photo } from './photo';
 import type { Language } from './settings';
@@ -27,9 +28,14 @@ export interface UserPushToken {
 export interface UserSettings {
   model: ModelType;
   language: Language;
+
   tz: string;
+  tzOffset: number;
   supressPostingToStrava: boolean;
   source: ActivitySource | null;
+
+  suppressHrRequest: boolean;
+  suppressPostActivitySurvey: boolean;
 }
 
 export interface BodyMetricsSummary {
@@ -41,7 +47,6 @@ export interface Tournament {
   date: Date;
   name: string;
   record: RunResult;
-
 }
 
 export interface UserCommon {
@@ -59,6 +64,7 @@ export interface UserCommon {
   garminId: string | null;
   whoopId: string | null;
   polarId: string | null;
+  suuntoId: string | null;
   stripeCustomerId: string | null;
 
   pushTokens?: Record<string, UserPushToken>;
@@ -97,6 +103,8 @@ export interface UserCommon {
   settings?: UserSettings;
 
   bodyMetrics?: BodyMetricsSummary;
+  hrMetrics?: HRMetricsCommon;
+
   duplicatedWith?: string | null;
 
   defaultAffiliateCouponId?: string | null;
@@ -106,6 +114,9 @@ export interface UserCommon {
   hasHadTrial?: boolean;
 
   taskCompleteDialogShown?: boolean;
+  lastHrRequestAt?: Date;
+
+  hrReminderNextAt?: Date;
 }
 
 export interface User extends Model, UserCommon { }

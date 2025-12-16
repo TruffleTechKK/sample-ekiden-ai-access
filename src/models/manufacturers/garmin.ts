@@ -109,6 +109,19 @@ export interface GarminActivityDetail {
   }[];
 }
 
+export interface GarminHRVSummary {
+  summaryId: string;
+  calendarDate: string;
+  startTimeInSeconds: number;
+  startTimeOffsetInSeconds: number;
+  durationInSeconds: number;
+  lastNightAvg: number;
+  lastNight5MinHigh: number;
+  hrvValues: {
+    [timeInSeconds: string]: number;
+  };
+}
+
 export interface GarminHealthDailySummary {
   summaryId: string;
   calendarDate: string;
@@ -141,15 +154,15 @@ export interface GarminHealthDailySummary {
   mediumStressDurationInSeconds: number;
   highStressDurationInSeconds: number;
   stressQualifier:
-  | 'unknown'
-  | 'calm'
-  | 'balanced'
-  | 'stressful'
-  | 'very_stressful'
-  | 'calm_awake'
-  | 'balanced_awake'
-  | 'stressful_awake'
-  | 'very_stressful_awake';
+    | 'unknown'
+    | 'calm'
+    | 'balanced'
+    | 'stressful'
+    | 'very_stressful'
+    | 'calm_awake'
+    | 'balanced_awake'
+    | 'stressful_awake'
+    | 'very_stressful_awake';
   stepsGoal: number;
   pushesGoal: number;
   intensityDurationGoalInSeconds: number;
@@ -191,21 +204,24 @@ export interface GarminSleepSummary {
     };
   };
   validation:
-  | 'MANUAL'
-  | 'DEVICE'
-  | 'OFF_WRIST'
-  | 'AUTO_TENTATIVE'
-  | 'AUTO_FINAL'
-  | 'AUTO_MANUAL'
-  | 'ENHANCED_TENTATIVE'
-  | 'ENHANCED_FINAL';
+    | 'MANUAL'
+    | 'DEVICE'
+    | 'OFF_WRIST'
+    | 'AUTO_TENTATIVE'
+    | 'AUTO_FINAL'
+    | 'AUTO_MANUAL'
+    | 'ENHANCED_TENTATIVE'
+    | 'ENHANCED_FINAL';
   timeOffsetSleepRespiration: {
     [timeInSeconds: number]: number;
   };
   timeOffsetSleepSpo2: {
     [timeInSeconds: number]: number;
   };
-  overallSleepScore: number;
+  overallSleepScore: {
+    qualifierKey: GarminSleepQualifier;
+    value: number;
+  };
   sleepScores: {
     totalDuration: {
       qualifierKey: GarminSleepQualifier;
@@ -300,7 +316,7 @@ export interface GarminFitMessages {
     numLaps: number;
     event: string;
     eventType: string;
-    sport: string;
+    sport: string | number;
     subSport: string;
     avgHeartRate: number;
     maxHeartRate: number;
@@ -431,7 +447,7 @@ export interface GarminFitMessages {
 
   sportMesgs?: {
     name: string;
-    sport: string;
+    sport: string | number;
     subSport: string;
   }[];
 

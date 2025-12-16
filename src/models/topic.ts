@@ -5,6 +5,7 @@ import type { ID, Model, Response } from './models';
 export interface TopicCommon {
   title: string | null;
   activityId: ID | null;
+  eventId: ID | null;
 
   runnerIds: ID[];
   coachIds: ID[];

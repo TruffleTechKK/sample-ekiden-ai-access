@@ -1,13 +1,14 @@
 import type { WrappedTimestamp } from '../providers/client-provider';
 import type { ActivitySource } from './activity';
-import type { GarminSleepSummary } from './garmin';
+import type { GarminSleepSummary } from './manufacturers/garmin';
+import type { PolarSleep } from './manufacturers/polar';
 import type { Model } from './models';
-import type { PolarSleep } from './polar';
+import type { Suunto247SleepSample } from './suunto';
 import type { WhoopSleep } from './whoop';
 
 export interface SleepCommon {
   source: ActivitySource;
-  raw: GarminSleepSummary | WhoopSleep | PolarSleep;
+  raw: GarminSleepSummary | WhoopSleep | PolarSleep | Suunto247SleepSample;
   measuredAt: WrappedTimestamp;
 
   durationInSeconds: number;
@@ -22,6 +23,8 @@ export interface SleepCommon {
   quality?: number;
 
   userId?: string;
+
+  duplicatedWithSleepId?: string;
 }
 
-export interface Sleep extends SleepCommon, Model { }
+export interface Sleep extends SleepCommon, Model {}

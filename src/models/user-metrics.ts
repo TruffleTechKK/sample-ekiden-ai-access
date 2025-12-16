@@ -1,6 +1,6 @@
 import type { WrappedTimestamp } from '../providers/client-provider';
 import type { ActivitySource } from './activity';
-import type { GarminUserMetricsSummary } from './garmin';
+import type { GarminUserMetricsSummary } from './manufacturers/garmin';
 import type { Model } from './models';
 
 export interface UserMetricsCommon {
@@ -14,4 +14,4 @@ export interface UserMetricsCommon {
   userId?: string;
 }
 
-export interface UserMetrics extends UserMetricsCommon, Model {}
+export interface UserMetrics extends UserMetricsCommon, Model { }

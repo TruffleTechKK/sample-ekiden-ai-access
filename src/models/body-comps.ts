@@ -1,6 +1,6 @@
 import type { WrappedTimestamp } from '../providers/client-provider';
 import type { ActivitySource } from './activity';
-import type { GarminBodyCompositionSummary } from './garmin';
+import type { GarminBodyCompositionSummary } from './manufacturers/garmin';
 import type { Model } from './models';
 
 export interface BodyCompsCommon {
@@ -19,4 +19,4 @@ export interface BodyCompsCommon {
   userId?: string;
 }
 
-export interface BodyComps extends BodyCompsCommon, Model {}
+export interface BodyComps extends BodyCompsCommon, Model { }

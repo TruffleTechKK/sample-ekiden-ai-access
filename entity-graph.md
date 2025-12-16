@@ -94,6 +94,57 @@ erDiagram
         boolean isPrivate
     }
 
+    TopicMember {
+        string id PK
+        string topicId FK
+        string userId FK
+        TopicMemberRole role
+        boolean ai
+        string lastReadMessageId
+        timestamp lastReadMessageAt
+    }
+
+    CoachLink {
+        string id PK
+        string runnerId FK
+        string coachId FK
+        CoachLinkStatus status
+        string subscriptionId FK
+        string planId FK
+        boolean freemium
+    }
+
+    CoachRegistration {
+        string id PK
+        string userId FK
+        string email
+        string displayName
+        string phoneNumber
+        string description
+        string coachingStyle
+        CoachRegistrationStatus status
+        number price
+        string currency
+        string interval
+        string coverPhotoUrl
+    }
+
+    Event {
+        string id PK
+        string userId FK
+        EventOwner owner
+        DistanceType distance
+        number distanceInMeters
+        EventType type
+        timestamp startAt
+        timestamp endAt
+        string name
+        string description
+        object target
+        string activityId FK
+        string activityTopicId FK
+    }
+
     %% Relationships
     User ||--o{ Coach : "can be"
     User ||--o{ Activity : "performs"
@@ -101,14 +152,22 @@ erDiagram
     User ||--o{ Subscription : "has"
     User ||--o{ Topic : "participates"
     User ||--o{ Template : "owns"
+    User ||--o{ CoachLink : "connects as runner/coach"
+    User ||--o{ CoachRegistration : "submits"
+    User ||--o{ Event : "creates"
 
     Coach ||--o{ Subscription : "provides"
     Coach ||--o{ Topic : "manages"
     Coach ||--o{ Template : "creates"
+    Coach ||--o{ CoachLink : "links to runners"
 
     Topic ||--o{ Message : "contains"
+    Topic ||--o{ TopicMember : "has members"
 
     Activity ||--o{ Message : "attached to"
+    Activity ||--o{ Event : "linked to"
+
+    Subscription ||--o{ CoachLink : "enables"
 ```
 
 ```mermaid
@@ -181,6 +240,51 @@ erDiagram
         number muscleMass
     }
 
+    UserMetrics {
+        string id PK
+        string userId FK
+        ActivitySource source
+        object raw
+        timestamp measuredAt
+        number vo2Max
+        number vo2MaxCycling
+    }
+
+    HRMetrics {
+        string id PK
+        string userId FK
+        HRMetricsSource source
+        number restingHR
+        number maxHR
+        number hrVariability
+        number heartRateReserve
+        number thresholdHR
+        object thresholdHRZones
+        object maxHRZones
+        object hrZones
+    }
+
+    UserProvider {
+        string id PK
+        string userId FK
+        UserProviderType type
+        UserProviderStatus status
+        object data
+        timestamp lastLinkedAt
+        string accessToken
+        string refreshToken
+        timestamp accessTokenExpiresAt
+        timestamp disconnectedAt
+        array scope
+    }
+
+    Fit {
+        string id PK
+        string activityId FK
+        object messages
+        ActivitySource source
+    }
+
     %% Relationships
     User ||--o| StravaData : "connects"
     User ||--o| GarminData : "connects"
@@ -188,8 +292,12 @@ erDiagram
     User ||--o| PolarData : "connects"
     User ||--o{ Sleep : "tracks"
     User ||--o{ BodyComps : "measures"
+    User ||--o{ UserMetrics : "has metrics"
+    User ||--o{ HRMetrics : "has HR data"
+    User ||--o{ UserProvider : "authenticates via"
 
     Activity ||--o| ActivityRaw : "has raw data"
+    Activity ||--o| Fit : "has FIT data"
 ```
 
 ## Business & Subscription Management
@@ -273,17 +381,31 @@ erDiagram
         boolean active
     }
 
+    UserAffiliateCouponRedeem {
+        string id PK
+        string userId FK
+        string code
+        string couponId FK
+        UserAffiliateCouponRedeemStatus status
+        string stripeCouponId
+        timestamp redeemedAt
+        timestamp expiresAt
+    }
+
     %% Relationships
     User ||--o{ Subscription : "subscribes"
     User ||--o{ Purchase : "makes"
     User ||--o{ Reward : "earns"
     User ||--o{ ReferralLog : "refers/referred"
     User ||--o{ UserAffiliateCoupon : "has"
+    User ||--o{ UserAffiliateCouponRedeem : "redeems"
 
     Coach ||--o{ CoachPlan : "offers"
 
     Subscription ||--|| CoachPlan : "based on"
     Subscription ||--o{ SubscriptionInvoice : "generates"
+
+    UserAffiliateCoupon ||--o{ UserAffiliateCouponRedeem : "redeemed via"
 ```
 
 ## AI Coaching & Communication System

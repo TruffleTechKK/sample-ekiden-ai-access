@@ -42,6 +42,10 @@ Launch the sample script with:
 yarn start
 ```
 
+## System Architecture
+
+See the full diagram in [diagrams/system-architecture.md](diagrams/system-architecture.md).
+
 ## Database Information
 
 ### Access Details

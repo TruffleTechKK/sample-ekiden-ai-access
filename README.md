@@ -20,7 +20,8 @@ Ensure your user has write permissions to `/tmp/` directory. This is where FIT f
 
 #### Firebase Configuration
 
-To access Firebase Firestore and Firebase Storage, you'll need a service account key file. Place the `student.json` file in the project root directory. This configuration path is customizable in the code.
+To access Firebase Firestore and Firebase Storage, you'll need a service account key file. Place the `student.json` file in the project root directory. This configuration path is customizable in the code. 
+You have access to a specific Firestore database, the ID is available in `src/firebase.ts`.
 
 **DO NOT COMMIT THE `student.json` file**
 
